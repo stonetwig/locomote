@@ -5,9 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight booker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/locomote.css">
   </head>
   <body>
+    <div class="container">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h1>Flight booker</h1>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Search flights</div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="from">From location</label>
+                <input type="text" class="form-control" id="from" placeholder="e.g. Sydney">
+              </div>
+              <div class="form-group">
+                <label for="to">To location</label>
+                <input type="text" class="form-control" id="to" placeholder="e.g. Heathrow">
+              </div>
+              <div class="form-group">
+                <label for="date">Travel date</label>
+                <input type="date" class="form-control" id="date" placeholder="2016-07-29">
+              </div>
+              <button type="submit" class="btn btn-default">Search flights</button>
+            </form>
+          </div>
+      </div>
+    </div>
+    </div>
     <script src="js/locomote.js"></script>
   </body>
 </html>
