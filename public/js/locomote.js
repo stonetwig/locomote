@@ -1,8 +1,41 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+$(function() {
+  var server = 'http://localhost:3000/';
+  var $from = $('#from');
+  var $to = $('#to');
+  var $date = $('#date');
+  var $submit = $('#search');
+
+  $from.focusout(function () {
+    var origin = $(this).val();
+    $.post(server + 'airports', {q: origin}, function(data) {
+      if (data.length === 0) {
+        alert('It seemes like there is no airport close to your origin! Please enter a valid city or airport.');
+      }
+    });
+  });
+
+  $to.focusout(function () {
+    var toDestination = $(this).val();
+    $.post(server + 'airports', {q: toDestination}, function(data) {
+      if (data.length === 0) {
+        alert('It seemes like there is no airport close to your destination! Please enter a valid city or airport.');
+      }
+    });
+  });
+
+  $submit.click(function(event) {
+    event.preventDefault();
+    $.post(server + 'search', {from: $from.val(), to: $to.val(), date: $date.val()}, function(data) {
+      console.log(data);
+    });
+  });
 
 
-}).call(this,require("qC859L"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_f2630c6c.js","/")
+});
+
+}).call(this,require("qC859L"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_18aa5c49.js","/")
 },{"buffer":3,"qC859L":5}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
