@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex">
+    <title>JS code task</title>
+    <style type="text/css">
+      body {
+        font-family: sans-serif;
+        line-height: 150%;
+      }
+      #container {
+        padding: 3em;
+      }
+      h2 {
+        margin-top: 2.5em;
+      }
+      code {
+        color: #068;
+      }
+      .rules {
+        max-width: 40em;
+        padding: 1em;
+        background: #fee;
+        border-radius: 5px;
+      }
+      li {
+
+      }
+      ul li {
+        margin-bottom: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>JS code task</h1>
+
+      <h2>Front end (part 1)</h2>
+
+      <p>You are building a flight search interface.</p>
+
+      <p>Create a search form with three fields:</p>
+      <ol>
+        <li>From location (eg: Sydney)</li>
+        <li>To location (eg: Heathrow)</li>
+        <li>Travel date (eg: 2016-09-02)</li>
+      </ol>
+
+      <p>
+        When the user clicks search, your front end code needs to
+        make an AJAX request to a small backend server you will build,
+        which will in turn contact the Flight API.
+      </p>
+
+      <h4>Usability</h4>
+
+      <p>
+        Flights may be cheaper on some days than others;<br/>
+        If the user picks <code><strong>2016-09-10</strong></code> as their travel date, then query their chosen date and nearby dates (+/- 2):<br/>
+        <code>2016-09-08, 2016-09-09, <strong>2016-09-10</strong>, 2016-09-11, 2016-09-12</code>
+      </p>
+
+      <p>
+        A great way to present all five days of results would be by using tabs.
+      </p>
+
+      <p>
+        You don't need to present all information returned by the flight search.<br/>
+        Show what you think is relevant to the user.
+      </p>
+
+      <div class="rules">
+        <strong>Important</strong>
+        <ul>
+          <li>
+            <p>
+              Don't use any frameworks like React, Angular or similar.<br/>
+              You may however use utility libraries like jQuery, lodash &amp; moment.js.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              We use coffeescript, however you can also use plain javascript or typescript.<br/>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Do not render HTML on the server; send data to the frontend and render it there.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <h2>Back end (part 2)</h2>
+
+      <p>Build a back end server which has three endpoints:<p>
+
+      <ol>
+        <li>
+          <code>/airlines</code><br/>
+          Lists all available airlines from the Flight API.
+        </li>
+        <li>
+          <code>/airports</code><br/>
+          Lists all matching airports from the Flight API.
+        </li>
+        <li>
+          <code>/search</code><br/>
+          Accepts all parameters from the search form above.<br/>
+          For a single flight search, you will need to make multiple Flight API requests:<br/>
+          <ul>
+            <li><code>/airlines</code> to get a list of airlines</li>
+            <li><code>/flight_search/:airline_code</code> to search for flights for each airline</li>
+          </ul>
+          The list of airlines may change, so caching is not an option.
+        </li>
+      </ol>
+
+      <div class="rules">
+        <strong>Important</strong>
+        <ul>
+          <li>
+            <p>
+              Stick to small frameworks like expressjs, koa, sinatra, tornado or similar.<br/>
+            </p>
+          </li>
+          <li>
+            <p>
+              We use node.js, however you're free to use ruby, python or similar.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <h2>Flight API (provided)</h2>
+
+      <p>Please use our Flight API to complete this task.</p>
+      <p>It has three endpoints:</p>
+
+      <ul>
+        <li>
+          <code>airlines</code><br/>
+          Provides a list of airlines. Takes no parameters.
+          <br/>
+          The airline codes from the response is required for the flight search.
+          <br/>
+          Example request: <code><a href="airlines">airlines</a></code>
+        </li>
+        <li>
+          <code>airports</code><br/>
+          Provides an airport search.<br/>
+          Query parameters:<br/>
+          <ul>
+            <li><code>q</code> - text based search param</li>
+          </ul>
+
+          The <code>airportCode</code> from the response is required for the flight search.
+
+          <br/>
+          Example request: <code><a href="airports?q=Melbourne">airports?q=Melbourne</a></code>
+        </li>
+        <li>
+          <code>flight_search/:airline_code</code><br/>
+          Provides a list of available flights for a single airline.<br/>
+          URL parameters:<br/>
+          <ul>
+            <li><code>airline_code</code> - airline code from the airlines endpoint</li>
+          </ul>
+
+          Query parameters:<br/>
+          <ul>
+            <li><code>date</code> departure date, <code>YYYY-MM-DD</code></li>
+            <li><code>from</code> origin airport code, eg: <code>SYD</code></li>
+            <li><code>to</code> destination airport code, eg: <code>JFK</code></li>
+          </ul>
+
+          <br/>
+          Example request: <code><a href="flight_search/QF?date=2016-09-02&from=SYD&to=JFK">flight_search/QF?date=2016-09-02&amp;from=SYD&amp;to=JFK</a></code>
+        </li>
+      </ul>
+
+      <h2>Expectations</h2>
+
+      <ul>
+        <li>
+          Documentation is not necessary; try to write self documenting code &amp; document only where required.
+        </li>
+      </ul>
+
+      <h2>Submission</h2>
+
+      <p>
+        Please send us a zip/gz/link to repository with your solution.
+      </p>
+
+      <p>
+        Provide a <code>start.sh</code> script in the root folder which will perform all required package installation,
+        and launch the server on port 3000.
+      </p>
+
+    </div>
+  </body>
+</html>

@@ -34,10 +34,111 @@
               <button type="submit" id="search" class="btn btn-default">Search flights</button>
             </form>
           </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div class="panel-heading">Results</div>
+          <div class="panel-body">
+            <div id="messages">
+              Please search by entering details into the form on your left.
+            </div>
+            <div id="resultTabs">
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation"><a id="2_days_before" href="#2_days_before_tab" aria-controls="2_days_before_tab" role="tab" data-toggle="tab">2 days before</a></li>
+                <li role="presentation"><a id="1_days_before" href="#1_days_before_tab" aria-controls="1_days_before_tab" role="tab" data-toggle="tab">1 day before</a></li>
+                <li role="presentation" class="active"><a id="date_searched" href="#date_searched_tab" aria-controls="date_searched_tab" role="tab" data-toggle="tab">Date searched</a></li>
+                <li role="presentation"><a id="1_days_after" href="#1_days_after_tab" aria-controls="1_days_after_tab" role="tab" data-toggle="tab">1 day after</a></li>
+                <li role="presentation"><a id="2_days_after" href="#2_days_after_tab" aria-controls="2_days_after_tab" role="tab" data-toggle="tab">2 days after</a></li>
+              </ul>
+
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane" id="2_days_before_tab">
+                  <table class="table table-hover" id="2_days_before_table">
+                    <thead>
+                      <th>Flight number</th>
+                      <th>From airport</th>
+                      <th>To airport</th>
+                      <th>Flight time (minutes)</th>
+                      <th>Airline</th>
+                      <th>Plane</th>
+                      <th>Price</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="1_days_before_tab">
+                  <table class="table table-hover" id="1_days_before_table">
+                    <thead>
+                      <th>Flight number</th>
+                      <th>From airport</th>
+                      <th>To airport</th>
+                      <th>Flight time (minutes)</th>
+                      <th>Airline</th>
+                      <th>Plane</th>
+                      <th>Price</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <div role="tabpanel" class="tab-pane active" id="date_searched_tab">
+                  <table class="table table-hover" id="date_searched_table">
+                    <thead>
+                      <th>Flight number</th>
+                      <th>From airport</th>
+                      <th>To airport</th>
+                      <th>Flight time (minutes)</th>
+                      <th>Airline</th>
+                      <th>Plane</th>
+                      <th>Price</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="1_days_after_tab">
+                  <table class="table table-hover" id="1_days_after_table">
+                    <thead>
+                      <th>Flight number</th>
+                      <th>From airport</th>
+                      <th>To airport</th>
+                      <th>Flight time (minutes)</th>
+                      <th>Airline</th>
+                      <th>Plane</th>
+                      <th>Price</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="2_days_after_tab">
+                  <table class="table table-hover" id="2_days_after_table">
+                    <thead>
+                      <th>Flight number</th>
+                      <th>From airport</th>
+                      <th>To airport</th>
+                      <th>Flight time (minutes)</th>
+                      <th>Airline</th>
+                      <th>Plane</th>
+                      <th>Price</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="js/locomote.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/locomote.js"></script>
   </body>
 </html>

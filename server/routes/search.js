@@ -1,14 +1,27 @@
 "use strict";
-var express = require('express');
-var router = express.Router();
-var request = require('request');
-var async = require("async");
+const express = require('express');
+const router = express.Router();
+const request = require('request');
+const async = require("async");
+const moment = require('moment');
 
 router.post('/', function(req, res, next) {
   const destination = req.body.to;
   const origin = req.body.from;
   const date = req.body.date;
   const airport_url = 'http://node.locomote.com/code-task/airports?q=';
+  const dateIsTooEarly = moment().isAfter(moment(date, 'YYYY-MM-DD'), 'day') || moment().isSame(moment(date, 'YYYY-MM-DD'), 'day');
+  if (!destination || !origin || !date || dateIsTooEarly) {
+    return res.json({
+      error: "Fields are incorrect or date is in the past.",
+      date: date,
+      destination: destination,
+      origin: origin,
+      today: moment().format('YYYY-MM-DD'),
+      sameDay: moment().isSame(moment(date, 'YYYY-MM-DD'), 'day'),
+      before: moment().isAfter(moment(date, 'YYYY-MM-DD'), 'day')
+    });
+  }
 
   async.waterfall([
     function(callback) {
@@ -34,7 +47,6 @@ router.post('/', function(req, res, next) {
       callback(null, airlines, destinationAirportCode, originAirportCode);
     }
   ], function (err, airlines, destinationAirportCode, originAirportCode) {
-    console.log(err, airlines, destinationAirportCode, originAirportCode, date);
     if (destinationAirportCode === null || originAirportCode === null) {
       res.json({
         error: "There was an error with the destination or origin. Please send a valid city/airport.",
@@ -53,7 +65,6 @@ router.post('/', function(req, res, next) {
             if (res.statusCode !== 200) {
               callback(res.statusCode);
             }
-            console.log(airlines[n].code);
             callback(error, JSON.parse(body));
         });
 
