@@ -2,7 +2,6 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var waterfall = require('async-waterfall');
 var async = require("async");
 
 router.post('/', function(req, res, next) {
@@ -11,7 +10,7 @@ router.post('/', function(req, res, next) {
   const date = req.body.date;
   const airport_url = 'http://node.locomote.com/code-task/airports?q=';
 
-  waterfall([
+  async.waterfall([
     function(callback) {
       request('http://node.locomote.com/code-task/airlines', (error, response, body) => {
         callback(error, JSON.parse(body));
@@ -45,34 +44,38 @@ router.post('/', function(req, res, next) {
         possibleDestinations: possibleDestinations
       });
     } else {
-      let flights = [];
-      let q = async.queue(function (airline, callback) {
-        const flight_search_url = 'http://node.locomote.com/code-task/flight_search/' + airline.code + '?date=' + date + '&from=' + originAirportCode + '&to=' + destinationAirportCode;
+      async.times(airlines.length, function(n, callback) {
+        const flight_search_url = 'http://node.locomote.com/code-task/flight_search/' + airlines[n].code + '?date=' + date + '&from=' + originAirportCode + '&to=' + destinationAirportCode;
         request(flight_search_url, function(error, response, body) {
             if (error) {
-              return callback(error);
+              callback(error);
             }
             if (res.statusCode !== 200) {
-              return callback(res.statusCode);
+              callback(res.statusCode);
             }
-            flights.push(JSON.parse(body));
-            callback();
+            console.log(airlines[n].code);
+            callback(error, JSON.parse(body));
         });
-      }, 1);
 
-      q.push(airlines, function(error) {
-          if (error) {
-            res.json({
-              error: "There was an error while calculating flights",
-              destinationAirportCode: destinationAirportCode,
-              originAirportCode: originAirportCode,
-              possibleOrigins: possibleOrigins,
-              possibleDestinations: possibleDestinations,
-              flights: flights
+      }, function(error, flights) {
+        if (error) {
+          res.json({
+            error: "There was an error while calculating flights",
+            destinationAirportCode: destinationAirportCode,
+            originAirportCode: originAirportCode,
+            possibleOrigins: possibleOrigins,
+            possibleDestinations: possibleDestinations,
+            flights: flights
+          });
+        } else {
+          let singleFlightsArray = [];
+          flights.forEach(flight_array => {
+            flight_array.forEach(flight => {
+              singleFlightsArray.push(flight);
             });
-          } else {
-            res.json(flights);
-          }
+          });
+          res.json(singleFlightsArray);
+        }
       });
     }
   });
